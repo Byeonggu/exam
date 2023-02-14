@@ -1,25 +1,21 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {	
-	
+public class Main {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		ArrayList<Integer> line = new ArrayList<Integer>();
 		
-		for (int i = 0; i < N; i++) {
-			int num = sc.nextInt();
-			if(num!=0) {
-				line.add(i-num, i+1);
-			}else {
-				line.add(i+1);
-			}
-			
+		Scanner sc = new Scanner(System.in);
+		
+		int N = sc.nextInt();
+		
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		
+		for(int i=1; i<=N; i++) {
+			arr.add(sc.nextInt(), i);
 		}
 		
-		for(int i : line) {
-			System.out.print(i+" ");
+		for(int i=N-1; i>=0; i--) {
+			System.out.print(arr.get(i)+" ");
 		}
 		
 	}
