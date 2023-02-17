@@ -1,40 +1,31 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution {
+	
 	public static void main(String[] args) {
-		
 		Scanner sc = new Scanner(System.in);
-		
+		StringBuilder sb = new StringBuilder();
 		int T = sc.nextInt();
-
-		
-		for(int i=0; i<T; i++) {
+		sc.nextLine();
+		for(int testCase = 1; testCase<=T; testCase++) {
+			sb.append("#"+testCase+" ");
+			String str = sc.nextLine();
+			char[] arr = str.toCharArray(); 
 			
-			boolean flag = false;
-			String word = sc.next();
-			String[] arr = new String[word.length()];
-			
-			arr = word.split("");
-			
-			for(int j=0; j<arr.length; j++) {
-				if(arr[j].equals(arr[arr.length-1-j])) {
-					flag = true;
-				}else flag = false;
-
+			boolean flag=true;
+			for(int i=0; i<str.length()/2; i++) {
+				
+				if(arr[i]!=arr[arr.length-1-i]){
+					flag=false;
+					break;
+				}
 			}
-			if(flag == true) {
-				System.out.println("#"+(i+1)+" "+"1");
-			} else {
-				System.out.println("#"+(i+1)+" "+"0");
+			if(flag) {
+				sb.append(1+"\n");
+			}else {
+				sb.append(0+"\n");
 			}
-			
-			
-			
-		} 
-		
-
-		
+		}
+		System.out.println(sb);
 	}
 }
