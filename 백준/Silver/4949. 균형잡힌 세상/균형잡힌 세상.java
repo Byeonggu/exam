@@ -1,40 +1,60 @@
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class Main {
-	public static void main(String[] args) throws IOException{
-		
+	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
-		StringBuilder sb = new StringBuilder();
-		Stack<String> stack;
-		while(true){
-			stack= new Stack<>();
-			String st = sc.nextLine();
-			if(st.equals("."))break;
-			String[] str = st.split("");
-			for(String s: str) {
-				if(s.equals("(")||s.equals("[")){
-					stack.add(s);
-				}
-				
-				if(!stack.isEmpty()&&s.equals(")")&&stack.peek().equals("(")) {
-					stack.pop();
-				}else if(!stack.isEmpty()&&s.equals("]")&&stack.peek().equals("[")) {
-					stack.pop();
-				}else if(s.equals(")")||s.equals("]")) {
-					stack.add(s);
-				}
+		out: while (sc.hasNext()) {
+			Stack<Character> stack = new Stack<>();
+			String line = sc.nextLine();
+			char[] splt = line.toCharArray();
+			if (splt.length == 1) {
+				if (splt[0] == '.')
+					break out;
 			}
-			if(stack.size()==0) {
-				sb.append("yes\n");
-			}else {
-				sb.append("no\n");
+			for (int i = 0; i < splt.length; i++) {
+				if (splt[i] == '(' || splt[i] == '[') {
+					stack.push(splt[i]);
+
+				} else if (splt[i] == ')') {
+//					stack.push(splt[i]);
+					
+					if (!stack.empty()) {
+						if (stack.peek() == '(')
+							stack.pop();// ( pop
+						else stack.push(splt[i]);
+					}else stack.push(splt[i]);
+					
+					
+//					else
+//						stack.push(splt[i]);
+					
+				} else if (splt[i] == ']') {
+//					stack.push(splt[i]);
+
+					if (!stack.empty()) {
+						if (stack.peek() == '[')
+							stack.pop();
+						else stack.push(splt[i]);
+					}else stack.push(splt[i]);
+					
+				} else if (splt[i] == '.')
+					break;
 			}
-			
+
+//				System.out.println(stack.pop());
+
+//			System.out.println(sb.toString());
+			if (stack.empty())
+				System.out.println("yes");
+			else
+				System.out.println("no");
+
+			while (!stack.empty())
+				stack.pop();
+
 		}
-		
-		System.out.println(sb);
+
 	}
 
 }
